@@ -2,6 +2,13 @@
 
 **GitHub Repo URL**: https://github.com/CMU-IDS-2022/final-project-michael-scott-paper-company
 
+**Team members:**
+
+Eeshwar Gurushankar Prasad (egurusha) <br>
+Ramya Ramanathan (ramyar2) <br>
+Sayani Kundu(sayanik) <br>
+Sumanth Subramanya Rao(ssr2)
+
 ## **Problem Description**
 
 Climate change is a global problem that affects all walks of life and is a pressing issue that needs to be addressed collectively by us. There are several factors that contribute to it and each of them to different extents. Given the widespread impact of climate change, it is important to analyze the major contributing factors and the effect. In this project, we attempt to craft a data-driven story using visualizations and interactions on climate change, its causes and some projections for the future based on current trends. We plan to look at this problem at two levels: at a country level - whether the economic status, the level of industrialization etc of a country directly correlates with how much it contributes to climate change and also at a global level - the relative amounts to which different countries and regions are impacted by climate change.
