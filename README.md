@@ -3,7 +3,7 @@
 * **Online URL**: https://share.streamlit.io/cmu-ids-2022/final-project-michael-scott-paper-company/main 
 * **Team members**:
   * Contact person: sayanik@andrew.cmu.edu
-  * eeshwarg@andrew.cmu.edu
+  * egurusha@andrew.cmu.edu
   * ssr2@andrew.cmu.edu
   * ramyar2@andrew.cmu.edu
 
@@ -15,8 +15,8 @@ Update towards the end of the project.
 
 ### Proposal
 
-- [ ] The URL at the top of this readme needs to point to your application online. It should also list the names of the team members.
-- [ ] A completed [proposal](Proposal.md). Each student should submit the URL that points to this file in their github repo on Canvas.
+- [x] The URL at the top of this readme needs to point to your application online. It should also list the names of the team members.
+- [x] A completed [proposal](Proposal.md). Each student should submit the URL that points to this file in their github repo on Canvas.
 
 ### Sketches
 
