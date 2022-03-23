@@ -1,6 +1,6 @@
 # CMU Interactive Data Science Final Project
 
-* **Online URL**: TODO
+* **Online URL**: https://share.streamlit.io/cmu-ids-2022/final-project-michael-scott-paper-company/main 
 * **Team members**:
   * Contact person: sayanik@andrew.cmu.edu
   * eeshwarg@andrew.cmu.edu
