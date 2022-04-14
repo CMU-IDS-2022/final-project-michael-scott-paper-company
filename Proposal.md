@@ -41,9 +41,6 @@ As an extension, we could predict the impact on surface temperature assuming the
 
 ### **Sketches and Data Analysis** 
 
-
-#### **Data Processing** 
-
 #### Data Cleaning
 We are using the WorldBank dataset for Country Climate and Development Report (CCDR). The dataset consists of more than 100 metrics over the years in the range of 1950-2020.  The dataset is very sparse for certain metrics and also has many missing fields. We plan to filter the dataset by the desired metric and further clean the data by removing missing data. We also plan to reduce the data volume by choosing countries of interest or countries which are representative of most data points we plan to demonstrate. 
  
@@ -63,6 +60,7 @@ Exploration of the trend of Total CO2 emission for a selected country(India). We
 
 The early exploration of per capita GHG emissions for India depicts an upward trend. We plan to use GHG emission as a metric which can have a significant impact on the global temperature increase. 
 
+
 ![alt text](data_exp3.png "data trends")  
 
 The early exploration of per capita GHG emissions for the United States depicts a downward trend, indicating that the country is reducing its output and carbon footprint 
@@ -72,4 +70,8 @@ The early exploration of per capita GHG emissions for the United States depicts 
 
 ### System Design 
 
+The images below depicts the sketches of data visulisations we intend to perform on the data.  
 
+![alt text](sketch_1.jpeg "sketch 1")
+
+![alt text](sketch2.jpeg "sketch 1")
