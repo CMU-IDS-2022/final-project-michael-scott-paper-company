@@ -28,6 +28,7 @@ Dataframe visualizations would be done to identify the general trend of data, wh
 
 Since we want to explore various factors and attributes in our problem, we do not use a single dataset. Instead we have collected some possible datasets that can give us the different kinds of information that we want to incorporate and analyze in our proposed solution. The datasets that we intend to use are:
 
+
 - Climate change data by World bank ([link](https://data.worldbank.org/topic/19))
 - Surface temperature data by year ([link](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data))
 - GDP/ Country status (developed/developing) data ([link](https://data.worldbank.org/country))
@@ -36,3 +37,18 @@ Since we want to explore various factors and attributes in our problem, we do no
 The main attributes of interest that we would be dealing with is the change in Temperature and Precipitation, per country and over the years. To identify contributing factors to climatic change, the attributes in the world bank datasets can be broadly classified into six categories, namely air pollutants, energy, agricultural presence, education, population and poverty indicators. This project would analyze the impact of each of these categories over climatic change over the years, and for each of the countries listed in the dataset.
 
 As an extension, we could predict the impact on surface temperature assuming the current rate of emissions and at lower and higher rates - to understand how aggressively policies need to be put in place.
+
+
+### **Sketches and Data Analysis** 
+
+
+#### **Data Processing** 
+
+#### Data Cleaning
+We are using the WorldBank dataset for Country Climate and Development Report (CCDR). The dataset consists of more than 100 metrics over the years in the range of 1950-2020.  The dataset is very sparse for certain metrics and also has many missing fields. We plan to filter the dataset by the desired metric and further clean the data by removing missing data. We also plan to reduce the data volume by choosing countries of interest or countries which are representative of most data points we plan to demonstrate. 
+ 
+#### Data Processing 
+We will first filter the dataset to contain only the desired metrics. We also plan to derive additional metrics which are aggregated over all the countries to analyze the global trend. We also plan to bin the countries into developed and developing categories and obtain category specific metrics to understand the implications. We also plan to combine multiple related metrics(e.g., co2 emissions from various sources) to obtain more consolidated data points. 
+
+![alt text](data_exp1.png "Title") 
+
