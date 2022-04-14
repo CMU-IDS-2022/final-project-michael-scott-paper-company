@@ -50,5 +50,26 @@ We are using the WorldBank dataset for Country Climate and Development Report (C
 #### Data Processing 
 We will first filter the dataset to contain only the desired metrics. We also plan to derive additional metrics which are aggregated over all the countries to analyze the global trend. We also plan to bin the countries into developed and developing categories and obtain category specific metrics to understand the implications. We also plan to combine multiple related metrics(e.g., co2 emissions from various sources) to obtain more consolidated data points. 
 
-![alt text](data_exp1.png "Title") 
+#### Data Exploration
+ 
+Data cleaning for metrics: The table below depicts the general structure of data. The first column depicts the metric name and the subsequent columns depicts the years. The values for certain metrics are missing in the original dataset.
+
+
+![alt text](data_exp1.png "data cleaning") 
+
+Exploration of the trend of Total CO2 emission for a selected country(India). We can observe the upward trend of increasing CO2 emission over the years from 2000 to 2020
+
+![alt text](data_exp4.png "data trends")  
+
+The early exploration of per capita GHG emissions for India depicts an upward trend. We plan to use GHG emission as a metric which can have a significant impact on the global temperature increase. 
+
+![alt text](data_exp3.png "data trends")  
+
+The early exploration of per capita GHG emissions for the United States depicts a downward trend, indicating that the country is reducing its output and carbon footprint 
+
+![alt text](data_exp2.png "data trends")
+
+
+### System Design 
+
 
