@@ -44,11 +44,16 @@ def get_line_chart(plot_df, yAxisLabel, yAxisTitle):
     return trend
 
 def do_intro():
-    st.subheader("Climate change causes and impact analysis!")
+    st.subheader("Climate change causes and impact analysis")
     st.markdown(" According to research,\
          the carbon dioxide levels in atmosphere are at an all time high, the ice sheets in the poles are shrinking,\
             the weather anamolies are high throughout the globe. Hence, it is crucial for us to take the cliamte change issue seriously \
             and install plans to help ameliorate these effects and mitigate the issue by acting on the causes actively.")
+
+    
+    st.write("The two diagrams shown below depict the pace at which the world around us is changing! \
+        On the left we can see the delta region in spain being submerged by sea level rise. \
+            The right diagram depicts the changing landscape of vegas and the reduction in the water sources.")
     
     st.write("The two diagrams shown below depict the pace at which the world around us is changing! \
         On the left we can see the delta region in spain being submerged by sea level rise. \
@@ -61,7 +66,13 @@ def do_intro():
         st.image("https://github.com/giswqs/data/raw/main/timelapse/spain.gif", width=450)
 
     with row1_col2:
-        st.image("https://github.com/giswqs/data/raw/main/timelapse/las_vegas.gif")
+        st.image("https://github.com/giswqs/data/raw/main/timelapse/las_vegas.gif", width=430)
+
+    st.subheader("Tangible effects of climate change")
+    st.write("The following plots show some worrying trends in the effects of climate change in terms of numbers. \
+    The first and most obvious effect is on temperature. As we all know, global temperatures have been rising over \
+        decades and humans are the single most influential species in this change. As a direct result of this, \
+            our polar ice caps are melting as well, causing an increase in sea levels.")
     
     def get_line_chart(plot_df, yAxisLabel, yAxisTitle):
         trend = alt.Chart(plot_df).mark_line().encode(
@@ -75,19 +86,25 @@ def do_intro():
       
     global_sea_level_file = "data/sea_level.csv" 
     global_sea_level = read_df_from_file(global_sea_level_file)
-    sea_level_trend = get_line_chart(global_sea_level, 'sea_level', 'Sea level').properties(width=400, height=400)
+    sea_level_trend = get_line_chart(global_sea_level, 'sea_level', 'Sea level'
+        ).properties(width=800, height=400
+        ).configure_axis(
+            labelFontSize=15,
+            titleFontSize=15
+        )
 
-    global_co2_file =  "data/co2.csv" 
-    global_co2 = read_df_from_file(global_co2_file)
-    global_co2 = global_co2[(global_co2['year'] > 1959) & (global_co2['year'] < 2022)]
-    co2_trend = get_line_chart(global_co2, 'co2', 'CO2 emission').properties(width=400, height=400)
 
     global_temp_file =  "data/temp.csv" 
     global_temp = read_df_from_file(global_temp_file)
-    temp_trend = get_line_chart(global_temp, 'temp', 'Global surface temperature').properties(width=400, height=400)
+    temp_trend = get_line_chart(global_temp, 'temp', 'Global surface temperature'
+        ).properties(width=800, height=400
+        ).configure_axis(
+            labelFontSize=15,
+            titleFontSize=15
+        )
 
-    ch = alt.vconcat(sea_level_trend, co2_trend, temp_trend)
-    ch
+    temp_trend
+    sea_level_trend
 
 countries = {}
 for member_name, e in Country.__members__.items():
@@ -245,7 +262,9 @@ def do_country_vis():
     return 
 
 def do_ice_vis():
-    st.subheader("Visualization 3")
+    st.subheader("Projected temperature and Arctic Sea ice extent")
+    st.write("In this page, we explore the effects of climate change on the average global surface temperature\
+        and the effect on the ice extent in the Arctic Sea. ")
     proj_temp_with_area = pd.read_csv("data/ice_area_temp.csv")
     
     range_ = [ 'darkgreen', 'lightgreen', 'orange', 'red', 'darkred','blue', 'lightblue','skyblue']
