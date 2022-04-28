@@ -142,9 +142,9 @@ def get_country_code(country):
 
 def do_global_vis():
 
-    st.title("Climate change analysis")
-
-    st.subheader("Visualization 1")
+    # st.title("Climate change analysis")
+    st.title("How does economy affect metric trends?")
+    # st.subheader("")
 
     metric_data_filt = pd.read_csv("data/filtered_metric_data_with_income_status_four_groups.csv")
 
@@ -159,9 +159,9 @@ def do_global_vis():
 
     picked = alt.selection_single(fields=["Indicator Name"], bind=input_dropdown, init={'Indicator Name': 'CO2 emissions (kt)'})
     line = alt.Chart(aggregated_data).mark_line(point=True).encode(
-        alt.Color('status', scale=alt.Scale(scheme='pastel1')),
-        alt.X('Year'),
-        alt.Y('Metric Data'),
+        alt.Color('status', title="Economic Status", sort=['High income', 'Upper middle income', 'Lower middle income', 'Low income']),
+        alt.X('Year:O'),
+        alt.Y('Metric Data', title="Value"),
         tooltip='Metric Data'
     ).properties(
         width=700,
@@ -169,6 +169,13 @@ def do_global_vis():
     ).add_selection(picked).transform_filter(picked)
 
     st.altair_chart(line)
+
+    st.write("We would now like to explore whether the economic status of a country affects the various metrics that potentially affect the climate. In order to analyze this we have taken four categories of countries based on their income and plotted how the average value of each of the metrics have changed over that past 15 years.")
+
+    st.write("Some interesting insights that we got were:")
+
+    st.write(" 1. The CO2 emission for high income countries can be seen decreasing indicating the policies and steps they may have taken in the recent past to tackle the global warming problem. However, for upper and lower middle income countries the emission skeep rising (yet to take actions to prevent this or effects not seen yet).\n2. We also observe that for all metrics except forest area the low income groups have a very low average value, indicating lesser industrialization in these areas.\n3. Electric power consumption also sees a similar trend with high income countries controlling the electric power consumption ( flattening curve) whereas the rest still have an increasing trend.\n4. The challenge for developing countries is they no longer have an opportunity to develop first in a high carbon-intensive way and then clean up and decarbonize later. They need support today to make investments now to slow a changing climate and enable billions to live safer, more prosperous, inclusive and sustainable lives.\n5. If they are well designed and implemented, the policies countries put in place for low-carbon, resilient growth could also help them address poverty and inequality.")
+
 
 def do_country_vis():
     def create_chart(country_data, picked, metric_name):
