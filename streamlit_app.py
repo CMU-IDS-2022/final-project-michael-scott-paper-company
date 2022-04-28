@@ -208,7 +208,7 @@ def do_country_vis():
     background = (
         alt.Chart(source)
         .mark_geoshape(fill="white", stroke="gray")
-        .properties(width=600, height=300)
+        .properties(width=600, height=500)
         .project("equirectangular")
     ).encode(
         # TODO: Remove this tooltip, added for debugging
@@ -220,7 +220,12 @@ def do_country_vis():
     df_join_new = pd.read_csv("data/Visualization_2_Data.csv")
     values = st.slider(
         'Select a range of years',
-        1995, 2019, (2003, 2019))
+        1995, 2019, (2003, 2019)) 
+    
+    st.markdown("The visualisation below shows the global overview of increase in temperature scaled by the value of increase. The countries that are red have shown significant increase in tempearure.\
+        We can select a particular country to view its statistics.  We try to correlate the trends in temperature increase with various possible factors.\
+            We can evaluate the factors to check whether they are correalted. ")
+
     df_2012 = df_join_new[df_join_new['Year'] == values[0]]
     df_2013 = df_join_new[df_join_new['Year'] == values[1]]
     df_merged = df_2012.set_index('Country').join(df_2013.set_index('Country'), how='inner', lsuffix='_x', rsuffix='_y').reset_index()
@@ -245,12 +250,12 @@ def do_country_vis():
             lookup="id",
             from_=alt.LookupData(data=df_merged, key='CountryCode',fields=['Country', 'TempDifference'])
         ).add_selection(picked)
-    )
+    ).properties(width=400, height=500)
 
 
     final_map = (
         (background + foreground)
-        .properties(width=700, height=400)
+        .properties(width=800, height=500)
         .project("equirectangular")
         # .project("orthographic")
     )
@@ -261,10 +266,7 @@ def do_country_vis():
     greenhouse = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'Total greenhouse gas emissions (kt of CO2 equivalent)'], picked, "Total greenhouse gas emissions")
     forest = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'Forest area (sq. km)'], picked, "Forest area")
 
-
     joined = alt.vconcat((co2|electric), (greenhouse|forest))
-
-
     st.altair_chart(final_map | joined)
     return 
 
