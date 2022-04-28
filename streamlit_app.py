@@ -44,18 +44,35 @@ def get_line_chart(plot_df, yAxisLabel, yAxisTitle):
     return trend
 
 def do_intro():
-    st.subheader(" No Country is safe from the impacts of climate change! According to research,\
-         carbon levels are at an all time high, the ice sheets in the poles are shrinking, \
-            the weather anamolies are high throughout the globe. ")
+    st.subheader("Climate change causes and impact analysis!")
+    st.markdown(" According to research,\
+         the carbon dioxide levels in atmosphere are at an all time high, the ice sheets in the poles are shrinking,\
+            the weather anamolies are high throughout the globe. Hence, it is crucial for us to take the cliamte change issue seriously \
+            and install plans to help ameliorate these effects and mitigate the issue by acting on the causes actively.")
     
-    st.write("")
+    st.write("The two diagrams shown below depict the pace at which the world around us is changing! \
+        On the left we can see the delta region in spain being submerged by sea level rise. \
+            The right diagram depicts the changing landscape of vegas and the reduction in the water sources.")
+
+   
+
     row1_col1, row1_col2 = st.columns(2)
     with row1_col1:
         st.image("https://github.com/giswqs/data/raw/main/timelapse/spain.gif", width=450)
 
     with row1_col2:
-        st.image("https://github.com/giswqs/data/raw/main/timelapse/las_vegas.gif", width=430)
+        st.image("https://github.com/giswqs/data/raw/main/timelapse/las_vegas.gif")
     
+    def get_line_chart(plot_df, yAxisLabel, yAxisTitle):
+        trend = alt.Chart(plot_df).mark_line().encode(
+            alt.X('year', axis=alt.Axis(title='Year')),
+            alt.Y(yAxisLabel, axis=alt.Axis(title=yAxisTitle), scale=alt.Scale(zero=False))
+        )
+        return trend
+    st.subheader("The increasing causes across the globe!") 
+    st.markdown("The graphs below indicate the scale at which these issues are causing havoc in the ecosystem of earth.\
+    The increasing trend in sea levels and global average temperature is alarming.")
+      
     global_sea_level_file = "data/sea_level.csv" 
     global_sea_level = read_df_from_file(global_sea_level_file)
     sea_level_trend = get_line_chart(global_sea_level, 'sea_level', 'Sea level').properties(width=400, height=400)
@@ -161,8 +178,8 @@ def do_country_vis():
         ).properties(width=200, height=200)
         return joined
 
-    st.subheader("Visualization 2")
-
+    st.subheader("Global increase in temperature and the correlation with the possible causes.")
+    st.write("")
     source = alt.topo_feature(data.world_110m.url, "countries")
     background = (
         alt.Chart(source)
