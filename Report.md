@@ -52,7 +52,10 @@ Support Vector Regression is a method that uses Support Vector Machine based hyp
 In order to explore the data and provide insights on the causes and effects of global warming we carry out multiple experimentations and consolidate the following:
 
 * Exploration -
+
 ![alt text](vis1.png "")
+
+
    To emphasize the importance of this project we plot the surface temperature and sea-level at a global scale over the past decades and from our plots it is very evident that there has been an average 1 degree increase in the temperature over the last century. The sea level has also increased by ~100mm over the last 30 years. These are the direct consequences of global warming and make it crucial to bring about awareness of how destructive climate change can be and what are some of the major features contributing to it. The data used for the plots were sourced from NASA's climate change repository([link](https://climate.nasa.gov/)).
 
 * Major factors affecting climate change -
