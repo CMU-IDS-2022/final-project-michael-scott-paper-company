@@ -151,7 +151,8 @@ def do_global_vis():
     metrics_needed = ['CO2 emissions (kt)', 'Electric power consumption (kWh per capita)', 'Total greenhouse gas emissions (kt of CO2 equivalent)', 'Forest area (sq. km)']
     metric_data_filt = metric_data_filt[metric_data_filt['Indicator Name'].isin(metrics_needed)]
     #input_dropdown = st.selectbox("Choose the Metric you want to visualize", metrics_needed)
-
+    st.markdown(f'<span style="color:blue">Interact-tip:</span> Select a metric type from the dropdown below and to visualize the values of CO2 emissions, electricity\
+        electric power consumption, total greenhouse gas emissions and forest area. The data is aggregated by the income of the country.', unsafe_allow_html=True)
     input_dropdown = alt.binding_select(options= metrics_needed, labels = metrics_needed, name = "Metric type: ")
 
     aggregated_data = metric_data_filt.groupby(["Year","status","Indicator Name"],as_index=False).agg({"Metric Data":"mean"})
@@ -345,7 +346,12 @@ def do_ice_vis():
     # (ssp1_point + ssp1_line) | pie 
 
 def do_co2():
-    st.subheader("Green house gas distribution")
+
+    st.subheader("Greenhouse gas distribution")
+    st.markdown("There is an increasing trend in the amount of greenhouse gases generated, mainly with a major increase in the amount of CO2 produced \
+CO2 forms the major contributor to greenhouse gas emissions for any specific year. \
+Oil, gas and coal are major contributors for the production of CO2, and are proportionately increasing over the years. This trend stays consistent across most continents. \
+For Europe, Africa and North America, CO2 emissions due to coal have reduced over the years, and this might be because of steps taken to reduce emissions from traditional fuel sources such as coal.")
     st.markdown("The visualisation digs deeper into the various green house gases.")
     metric_data_filt = pd.read_csv("data/green_house_gas.csv")
     metric_data_filt = metric_data_filt.replace({'CO2 emissions (kt)': 'CO2 emissions', 'Methane emissions (kt of CO2 equivalent)': 'Methane emissions', 'Nitrous oxide emissions (thousand metric tons of CO2 equivalent)': 'Nitrous oxide emissions'})
