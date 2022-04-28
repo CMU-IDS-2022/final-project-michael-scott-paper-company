@@ -77,7 +77,8 @@ def do_intro():
     def get_line_chart(plot_df, yAxisLabel, yAxisTitle):
         trend = alt.Chart(plot_df).mark_line().encode(
             alt.X('year', axis=alt.Axis(title='Year')),
-            alt.Y(yAxisLabel, axis=alt.Axis(title=yAxisTitle), scale=alt.Scale(zero=False))
+            alt.Y(yAxisLabel, axis=alt.Axis(title=yAxisTitle), scale=alt.Scale(zero=False)),
+            tooltip=[alt.Tooltip(yAxisLabel, title =yAxisTitle)]
         )
         return trend
     st.markdown("The graphs below indicate the scale at which these issues are causing havoc in the ecosystem of earth.\
@@ -159,7 +160,7 @@ def do_global_vis():
     line = alt.Chart(aggregated_data).mark_line(point=True).encode(
         alt.Color('status', title="Economic Status", sort=['High income', 'Upper middle income', 'Lower middle income', 'Low income']),
         alt.X('Year:O'),
-        alt.Y('Metric Data', title="Value"),
+        alt.Y('Metric Data', title="Metric Value"),
         tooltip='Metric Data'
     ).properties(
         width=700,
@@ -191,6 +192,7 @@ def do_country_vis():
         area = base1.mark_area(opacity=0.3, color='#57A44C').encode(
             alt.Y('mean(Metric Data)',
             axis=alt.Axis(title=metric_name, titleColor='#57A44C')),
+            tooltip=[alt.Tooltip('mean(Metric Data)', title=metric_name)]
         ).transform_filter(picked)
 
         line = base1.mark_line(stroke='#5276A7', point = True).encode(
@@ -198,7 +200,7 @@ def do_country_vis():
                     axis=alt.Axis(title='Temperature in degrees celsius', titleColor='#5276A7'),
                     scale=alt.Scale(zero=False)
             ),
-            tooltip = 'mean(AbsoluteTemperature)'
+            tooltip = [alt.Tooltip('mean(AbsoluteTemperature)', title="Temperature")]
         ).transform_filter(picked)
 
 
@@ -215,11 +217,6 @@ def do_country_vis():
         .mark_geoshape(fill="white", stroke="gray")
         .properties(width=600, height=500)
         .project("equirectangular")
-    ).encode(
-        # TODO: Remove this tooltip, added for debugging
-        tooltip=[
-                alt.Tooltip("id:N", title="ID"),
-        ]
     )
 
     df_join_new = read_df_from_file("data/Visualization_2_Data.csv")
@@ -348,7 +345,7 @@ def do_co2():
         y=alt.Y('sum(Metric Data)', axis = alt.Axis(title='Emission in kilo tons')),
         x='Year',
         color='Indicator Name',
-        tooltip='sum(Metric Data)'
+        tooltip=[alt.Tooltip('sum(Metric Data)', title="Emission")]
     ).properties(width=800, height=400)
     st.altair_chart(chart)
 
