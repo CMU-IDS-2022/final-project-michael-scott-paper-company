@@ -273,22 +273,28 @@ def do_country_vis():
 def do_ice_vis():
     st.subheader("Projected temperature and Arctic Sea ice extent")
     st.write("In this page, we explore the effects of climate change on the average global surface temperature\
-        and the effect on the ice extent in the Arctic Sea. ")
+        and the effect on the ice extent in the Arctic Sea. For this, we have obtained projected values of\
+        temperature from 'Shared Socioeconomic Pathways' (SSPs). The SSPs provide 5 pathways the world could take\
+        ranging from a sustainability-focused growth to unconstrained growth in economic output and energy use.")
+
+    st.write("Based on these temperature projections, we have trained a simple regression that predicts the\
+        area of remaining ice extent in the Arctic sea. In some of the extreme cases such as SSP5, we see that\
+        we might not have any ice caps left at the North Pole.")
     proj_temp_with_area = pd.read_csv("data/ice_area_temp.csv")
     
     range_ = [ 'darkgreen', 'lightgreen', 'orange', 'red', 'darkred','blue', 'lightblue','skyblue']
     proj_new_data = proj_temp_with_area.rename(columns={'Category': 'Year'})
-    brush = alt.selection_single(fields=['SSP', 'SSPType'], on='click', empty='none')
+    brush = alt.selection_single(fields=['SSP', 'SSPType'], on='click', empty='none', init={'SSP': '9.61', 'SSPType':'SSP0'})
     base = alt.Chart(proj_new_data).encode(
         alt.X('Year:Q'),
     )
     ssp1_point = base.mark_point().encode(
-        alt.Y('SSP:Q', scale=alt.Scale(zero=False)),
+        alt.Y('SSP:Q', scale=alt.Scale(zero=False),axis=alt.Axis(title='Surface temperature')),
         alt.X('Year', scale=alt.Scale(zero=False)),
         alt.Color('SSPType'),
         strokeWidth=alt.value(2),
         tooltip = 'area'
-    ).properties(width=700, height=400).add_selection(brush)
+    ).properties(width=600, height=400).add_selection(brush)
 
     ssp1_line = base.mark_line(
         point={
