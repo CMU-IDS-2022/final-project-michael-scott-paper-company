@@ -196,7 +196,7 @@ def do_country_vis():
     df_join_new = pd.read_csv("data/Visualization_2_Data.csv")
     values = st.slider(
         'Select a range of years',
-        1995, 2019, (2009, 2019))
+        1995, 2019, (2003, 2019))
     df_2012 = df_join_new[df_join_new['Year'] == values[0]]
     df_2013 = df_join_new[df_join_new['Year'] == values[1]]
     df_merged = df_2012.set_index('Country').join(df_2013.set_index('Country'), how='inner', lsuffix='_x', rsuffix='_y').reset_index()
@@ -248,9 +248,9 @@ def do_ice_vis():
     st.subheader("Visualization 3")
     proj_temp_with_area = pd.read_csv("data/ice_area_temp.csv")
     
-    range_ = [ 'darkgreen', 'lightgreen', 'orange', 'red', 'darkred','blue', 'skyblue','lightblue']
+    range_ = [ 'darkgreen', 'lightgreen', 'orange', 'red', 'darkred','blue', 'lightblue','skyblue']
     proj_new_data = proj_temp_with_area.rename(columns={'Category': 'Year'})
-    brush = alt.selection_single(fields=['SSP', 'SSPType'], on='mouseover', empty='none')
+    brush = alt.selection_single(fields=['SSP', 'SSPType'], on='click', empty='none')
     base = alt.Chart(proj_new_data).encode(
         alt.X('Year:Q'),
     )
@@ -259,7 +259,7 @@ def do_ice_vis():
         alt.X('Year', scale=alt.Scale(zero=False)),
         alt.Color('SSPType'),
         strokeWidth=alt.value(2),
-        tooltip = 'SSP'
+        tooltip = 'area'
     ).properties(width=700, height=400).add_selection(brush)
 
     ssp1_line = base.mark_line(
@@ -271,13 +271,13 @@ def do_ice_vis():
         alt.X('Year', scale=alt.Scale(zero=False)),
         
         alt.Color('SSPType'),
-        tooltip='SSP',
+        tooltip='area',
         strokeWidth=alt.value(2)
     )
 
     pie = alt.Chart(proj_new_data).mark_arc().encode(
         theta = alt.Theta(field="area", type="quantitative") ,
-        color = alt.Color(field="area", type="nominal", scale=alt.Scale(range=range_)),
+        color = alt.Color(field="ssp_type", scale=alt.Scale(range=range_)),
         radius = alt.datum(150, scale=None), 
         tooltip="area"
     ).transform_filter(brush).properties(width=400, height=400).add_selection(brush)
