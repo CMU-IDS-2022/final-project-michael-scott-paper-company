@@ -32,37 +32,41 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+@st.cache
+def read_df_from_file(filename):
+    return pd.read_csv(filename)
+
+def get_line_chart(plot_df, yAxisLabel, yAxisTitle):
+    trend = alt.Chart(plot_df).mark_line().encode(
+        alt.X('year', axis=alt.Axis(title='Year')),
+        alt.Y(yAxisLabel, axis=alt.Axis(title=yAxisTitle), scale=alt.Scale(zero=False))
+    )
+    return trend
+
 def do_intro():
     st.subheader(" No Country is safe from the impacts of climate change! According to research,\
-         the carbon levels are at an all time high, the ice sheets in the poles are shrinking, \
+         carbon levels are at an all time high, the ice sheets in the poles are shrinking, \
             the weather anamolies are high throughout the globe. ")
     
     st.write("")
     row1_col1, row1_col2 = st.columns(2)
     with row1_col1:
-        st.image("https://github.com/giswqs/data/raw/main/timelapse/spain.gif")
+        st.image("https://github.com/giswqs/data/raw/main/timelapse/spain.gif", width=450)
 
     with row1_col2:
-        st.image("https://github.com/giswqs/data/raw/main/timelapse/las_vegas.gif")
-    
-    def get_line_chart(plot_df, yAxisLabel, yAxisTitle):
-        trend = alt.Chart(plot_df).mark_line().encode(
-            alt.X('year', axis=alt.Axis(title='Year')),
-            alt.Y(yAxisLabel, axis=alt.Axis(title=yAxisTitle), scale=alt.Scale(zero=False))
-        )
-        return trend
+        st.image("https://github.com/giswqs/data/raw/main/timelapse/las_vegas.gif", width=430)
     
     global_sea_level_file = "data/sea_level.csv" 
-    global_sea_level = pd.read_csv(global_sea_level_file)
+    global_sea_level = read_df_from_file(global_sea_level_file)
     sea_level_trend = get_line_chart(global_sea_level, 'sea_level', 'Sea level').properties(width=400, height=400)
 
     global_co2_file =  "data/co2.csv" 
-    global_co2 = pd.read_csv(global_co2_file)
+    global_co2 = read_df_from_file(global_co2_file)
     global_co2 = global_co2[(global_co2['year'] > 1959) & (global_co2['year'] < 2022)]
     co2_trend = get_line_chart(global_co2, 'co2', 'CO2 emission').properties(width=400, height=400)
 
     global_temp_file =  "data/temp.csv" 
-    global_temp = pd.read_csv(global_temp_file)
+    global_temp = read_df_from_file(global_temp_file)
     temp_trend = get_line_chart(global_temp, 'temp', 'Global surface temperature').properties(width=400, height=400)
 
     ch = alt.vconcat(sea_level_trend, co2_trend, temp_trend)
