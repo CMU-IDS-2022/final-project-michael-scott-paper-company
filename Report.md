@@ -25,9 +25,6 @@ This brings out a need for a website which collates global warming data from mul
 
 ## Related Work
 
-A description of prior research or work related to your project. 
-Many of the related work in this area has been done either by government agencies or environmental agencies. 
-
 One significant paper that thoroughly researches all the existing methods is: Exploring the Role of Visualization in Climate Change Communication – an Audience Perspective ([link](https://www.diva-portal.org/smash/get/diva2:1204420/FULLTEXT01.pdf)).  The paper exhaustively lists all the theoretical and methodological foundations used in climate change communication and the Web-based Visualization:	VisAdapt. 
 
 Another source of research on this topic comes from the World Bank data ([link](https://data.worldbank.org/)) The world bank research page highlights the various factors affecting climate change. The website shows statistics on each country and various other metrics. 
