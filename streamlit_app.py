@@ -44,7 +44,7 @@ def get_line_chart(plot_df, yAxisLabel, yAxisTitle):
     return trend
 
 def do_intro():
-    st.subheader("Climate change causes and impact analysis")
+    st.subheader("Climate change: causes and impact analysis")
     st.markdown(" According to research,\
          the carbon dioxide levels in atmosphere are at an all time high, the ice sheets in the poles are shrinking,\
             the weather anamolies are high throughout the globe. Hence, it is crucial for us to take the cliamte change issue seriously \
@@ -80,7 +80,6 @@ def do_intro():
             alt.Y(yAxisLabel, axis=alt.Axis(title=yAxisTitle), scale=alt.Scale(zero=False))
         )
         return trend
-    st.subheader("The increasing causes across the globe!") 
     st.markdown("The graphs below indicate the scale at which these issues are causing havoc in the ecosystem of earth.\
     The increasing trend in sea levels and global average temperature is alarming.")
       
@@ -143,13 +142,12 @@ def get_country_code(country):
 def do_global_vis():
 
     # st.title("Climate change analysis")
-    st.title("How does economy affect metric trends?")
+    st.subheader("How does a country's economic status affect metric trends?")
     # st.subheader("")
 
     metric_data_filt = read_df_from_file("data/filtered_metric_data_with_income_status_four_groups.csv")
 
     metrics_needed = ['CO2 emissions (kt)', 'Electric power consumption (kWh per capita)', 'Total greenhouse gas emissions (kt of CO2 equivalent)', 'Forest area (sq. km)']
-
     metric_data_filt = metric_data_filt[metric_data_filt['Indicator Name'].isin(metrics_needed)]
     #input_dropdown = st.selectbox("Choose the Metric you want to visualize", metrics_needed)
 
@@ -197,7 +195,7 @@ def do_country_vis():
 
         line = base1.mark_line(stroke='#5276A7', point = True).encode(
             alt.Y('mean(AbsoluteTemperature)',
-                    axis=alt.Axis(title='Temperature', titleColor='#5276A7'),
+                    axis=alt.Axis(title='Temperature in degrees celsius', titleColor='#5276A7'),
                     scale=alt.Scale(zero=False)
             ),
             tooltip = 'mean(AbsoluteTemperature)'
@@ -209,7 +207,7 @@ def do_country_vis():
         ).properties(width=200, height=200)
         return joined
 
-    st.subheader("Global increase in temperature and the correlation with the possible causes.")
+    st.subheader("Temperature increase and its correlation with possible causes")
     st.write("")
     source = alt.topo_feature(data.world_110m.url, "countries")
     background = (
@@ -231,31 +229,38 @@ def do_country_vis():
     
     st.markdown("The visualisation below shows the global overview of increase in temperature scaled by the value of increase. The countries that are red have shown significant increase in tempearure.\
         We can select a particular country to view its statistics.  We try to correlate the trends in temperature increase with various possible factors.\
-            We can evaluate the factors to check whether they are correalted. ")
+            We can evaluate the factors to check whether they are correlated. ")
+
+    st.markdown(f'<span style="color:green">Analysis:</span> We want to understand the relative contribution of different countries to various cause of climate change such as carbon dioxide emissions,\
+         electric power consumption, total greenhouse gas emissions and forest area.', unsafe_allow_html=True)
+    st.markdown(f'<span style="color:blue">Interact-tip:</span> Select a time window and a country to view the temperature difference across years. The graphs on the right show the trend\
+        of temperature change over the years along with the metrics mentioned above. This visualization helps analyze the correlation between temperature and other causal metrics', unsafe_allow_html=True)
+
 
     df_2012 = df_join_new[df_join_new['Year'] == values[0]]
     df_2013 = df_join_new[df_join_new['Year'] == values[1]]
     df_merged = df_2012.set_index('Country').join(df_2013.set_index('Country'), how='inner', lsuffix='_x', rsuffix='_y').reset_index()
-    df_merged["TempDifference"] = df_merged['TempDifference_y'] - df_merged['TempDifference_x']
+    df_merged["Temperature difference"] = df_merged['TempDifference_y'] - df_merged['TempDifference_x']
     df_merged['Country'] = df_merged.apply(lambda x: transform_country(x['Country']), axis=1)
     df_merged['CountryCode'] = df_merged.apply(lambda x: get_country_code(x['Country']), axis=1)
 
 
-    max_value = max(df_merged['TempDifference'].max(), abs(df_merged['TempDifference'].min()))
+    max_value = max(df_merged['Temperature difference'].max(), abs(df_merged['Temperature difference'].min()))
+    df_merged['Temperature difference'] = round(df_merged['Temperature difference'], 3)
     picked = alt.selection_single(fields=["Country"])
     foreground = (
         alt.Chart(source)
         .mark_geoshape(stroke="black", strokeWidth=0.15)
         .encode(
-            color = alt.condition(picked, 'TempDifference:Q', alt.value("lightgray"), scale=alt.Scale(scheme="redblue", reverse=True, domain=[-max_value, max_value])),
+            color = alt.condition(picked, 'Temperature difference:Q', alt.value("lightgray"), scale=alt.Scale(scheme="redblue", reverse=True, domain=[-max_value, max_value])),
             tooltip=[
                 alt.Tooltip("Country:N", title="Country"),
-                alt.Tooltip("TempDifference:Q", title="Temperature Difference Per Year"),
+                alt.Tooltip("Temperature difference:Q", title="Temperature Difference"),
             ],
         )
         .transform_lookup(
             lookup="id",
-            from_=alt.LookupData(data=df_merged, key='CountryCode',fields=['Country', 'TempDifference'])
+            from_=alt.LookupData(data=df_merged, key='CountryCode',fields=['Country', 'Temperature difference'])
         ).add_selection(picked)
     ).properties(width=400, height=500)
 
@@ -264,7 +269,6 @@ def do_country_vis():
         (background + foreground)
         .properties(width=800, height=500)
         .project("equirectangular")
-        # .project("orthographic")
     )
 
     country_data = df_join_new
@@ -289,16 +293,20 @@ def do_ice_vis():
         we might not have any ice caps left at the North Pole.")
     proj_temp_with_area = read_df_from_file("data/ice_area_temp.csv")
     
-    range_ = [ 'darkgreen', 'lightgreen', 'orange', 'red', 'darkred','blue', 'white','skyblue']
+    range_ = [ 'darkgreen', 'lightgreen', 'orange', 'red', 'darkred','blue']
     proj_new_data = proj_temp_with_area.rename(columns={'Category': 'Year'})
-    brush = alt.selection_single(fields=['SSP', 'SSPType'], on='click', empty='none', init={'SSP': '9.61', 'SSPType':'SSP0'})
+    proj_new_data = proj_new_data.replace({'SSP0': 'Measured temperature', 'SSP1': 'SSP 1', 'SSP2': 'SSP 2', 'SSP3': 'SSP 3', 'SSP4': 'SSP 4', 'SSP5': 'SSP 5', 'ice': 'Ice', 'water': 'Water'})
+    proj_new_data = proj_new_data.rename(columns={'ssp_type': 'Natural resource', 'SSPType': 'Path'})
+    brush = alt.selection_single(fields=['SSP', 'Path'], on='click', empty='none', init={'SSP': '9.61', 'Path':'SSP0'})
     base = alt.Chart(proj_new_data).encode(
         alt.X('Year:Q'),
     )
+
+
     ssp1_point = base.mark_point().encode(
         alt.Y('SSP:Q', scale=alt.Scale(zero=False),axis=alt.Axis(title='Surface temperature')),
         alt.X('Year', scale=alt.Scale(zero=False)),
-        alt.Color('SSPType'),
+        alt.Color('Path'),
         strokeWidth=alt.value(2),
         tooltip = 'area'
     ).properties(width=600, height=400).add_selection(brush)
@@ -311,28 +319,33 @@ def do_ice_vis():
         alt.Y('SSP:Q', scale=alt.Scale(zero=False)),
         alt.X('Year', scale=alt.Scale(zero=False)),
         
-        alt.Color('SSPType'),
+        alt.Color('Path'),
         tooltip='area',
         strokeWidth=alt.value(2)
     )
 
+    pie_range = ['white', 'lightblue']
     pie = alt.Chart(proj_new_data).mark_arc().encode(
         theta = alt.Theta(field="area", type="quantitative") ,
-        color = alt.Color(field="ssp_type", scale=alt.Scale(range=range_)),
+        color = alt.Color(field="Natural resource", scale=alt.Scale(range=pie_range)),
         radius = alt.datum(150, scale=None), 
         tooltip="area"
     ).transform_filter(brush).properties(width=400, height=400).add_selection(brush)
 
     # ssp1_line   
-    (ssp1_point + ssp1_line) | pie 
+    st.altair_chart(((ssp1_point + ssp1_line) | pie).resolve_scale(
+        color='independent'
+    ))
+    # (ssp1_point + ssp1_line) | pie 
 
 def do_co2():
 
     st.subheader("Green house gas distribution")
     st.markdown("The visualisation digs deeper into the various green house gases.")
     metric_data_filt = pd.read_csv("data/green_house_gas.csv")
+    metric_data_filt = metric_data_filt.replace({'CO2 emissions (kt)': 'CO2 emissions', 'Methane emissions (kt of CO2 equivalent)': 'Methane emissions', 'Nitrous oxide emissions (thousand metric tons of CO2 equivalent)': 'Nitrous oxide emissions'})
     chart = alt.Chart(metric_data_filt).mark_area().encode(
-        y=alt.Y('sum(Metric Data)'),
+        y=alt.Y('sum(Metric Data)', axis = alt.Axis(title='Emission in kilo tons')),
         x='Year',
         color='Indicator Name',
         tooltip='sum(Metric Data)'
@@ -340,13 +353,16 @@ def do_co2():
     st.altair_chart(chart)
 
 
-    st.subheader("CO2 emmissions - Biggest Contributors")
+
+    st.subheader("CO2 emissions - Biggest Contributors")
     st.markdown("The visualisation uncovers the emission rates of carbon dioxide across different continents.\
          The four charts visualise the four major years and the rates corresponding to the years.")
     co2_dist = pd.read_csv("data/co2_data.csv")
     continents = ["Asia", "Oceania", "North America", "South America", "Europe", "Africa"]
     
     continent = st.multiselect("Continent", continents,default=["North America"])
+
+    co2_dist = co2_dist.rename(columns={'trade_co2': 'CO2 from trade', 'gas_co2': 'CO2 from gas', 'oil_co2': 'CO2 from oil', 'coal_co2': 'CO2 from coal', 'flaring_co2': 'CO2 from flaring', 'cement_co2': 'CO2 from cement', 'other_industry_co2': 'CO2 from other industries', 'consumption_co2': 'Total CO2 consumption'})
 
     if not continent:
         st.write("Please select at least one type of continent from the dropdown")
@@ -359,26 +375,34 @@ def do_co2():
         y1 = alt.Chart(co2_dist).mark_bar().encode(
                 x="1990",
                 y=alt.Y('index', sort = "-x", title=""),
-                tooltip = '1990'
+                tooltip = '1990',
+            ).properties(
+                width=320
             )
 
         y2 = alt.Chart(co2_dist).mark_bar().encode(
                 x = "2000",
                 y = alt.Y('index', sort = "-x", title=""),
                 tooltip = '2000'
+            ).properties(
+                width=320
             )
 
         y3 = alt.Chart(co2_dist).mark_bar().encode(
                     x="2010",
                     y=alt.Y('index', sort = "-x", title=""),
                     tooltip = '2010'
-                )
+                ).properties(
+                width=320
+            )
 
         y4 = alt.Chart(co2_dist).mark_bar().encode(
                     x="2019",
                     y=alt.Y('index', sort = "-x", title=""),
                     tooltip = '2019'
-                )
+                ).properties(
+                width=320
+            )
 
         st.altair_chart((y1 | y2 ))
         st.altair_chart((y3 | y4))
@@ -402,4 +426,4 @@ elif visual_type == visualization[0]:
     do_intro()
 
 
-st.markdown("This project was created by Sayani, Ramya, Eeshwar and Sumanth for the [Interactive Data Science](https://dig.cmu.edu/ids2022) course at [Carnegie Mellon University](https://www.cmu.edu).")
+st.markdown("Made with :heart: by Sayani, Ramya, Eeshwar and Sumanth for the [Interactive Data Science](https://dig.cmu.edu/ids2022) course at [Carnegie Mellon University](https://www.cmu.edu).")
