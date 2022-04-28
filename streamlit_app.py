@@ -86,7 +86,7 @@ def do_intro():
       
     global_sea_level_file = "data/sea_level.csv" 
     global_sea_level = read_df_from_file(global_sea_level_file)
-    sea_level_trend = get_line_chart(global_sea_level, 'sea_level', 'Sea level'
+    sea_level_trend = get_line_chart(global_sea_level, 'sea_level', 'Sea level (mm)'
         ).properties(width=800, height=400
         ).configure_axis(
             labelFontSize=15,
@@ -96,7 +96,7 @@ def do_intro():
 
     global_temp_file =  "data/temp.csv" 
     global_temp = read_df_from_file(global_temp_file)
-    temp_trend = get_line_chart(global_temp, 'temp', 'Global surface temperature'
+    temp_trend = get_line_chart(global_temp, 'temp', 'Global surface temperature (°C)'
         ).properties(width=800, height=400
         ).configure_axis(
             labelFontSize=15,
@@ -206,7 +206,7 @@ def do_country_vis():
 
         joined = alt.layer(area, line).resolve_scale(
             y = 'independent'
-        ).properties(width=200, height=200)
+        ).properties(width=300, height=200)
         return joined
 
     st.subheader("Temperature increase and its correlation with possible causes")
@@ -215,7 +215,7 @@ def do_country_vis():
     background = (
         alt.Chart(source)
         .mark_geoshape(fill="white", stroke="gray")
-        .properties(width=600, height=500)
+        .properties(width=800, height=500)
         .project("equirectangular")
     )
 
@@ -275,7 +275,7 @@ def do_country_vis():
     forest = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'Forest area (sq. km)'], picked, "Forest area")
 
     joined = alt.vconcat((co2|electric), (greenhouse|forest))
-    st.altair_chart(final_map | joined)
+    st.altair_chart(final_map & joined)
     return 
 
 def do_ice_vis():
@@ -303,10 +303,14 @@ def do_ice_vis():
     ssp1_point = base.mark_point().encode(
         alt.Y('SSP:Q', scale=alt.Scale(zero=False),axis=alt.Axis(title='Surface temperature')),
         alt.X('Year', scale=alt.Scale(zero=False)),
-        alt.Color('Path'),
+        alt.Color('Path', legend=alt.Legend(
+        orient='none',
+        legendX=0, legendY=-40,
+        direction='horizontal',
+        titleAnchor='middle')),
         strokeWidth=alt.value(2),
         tooltip = 'area'
-    ).properties(width=600, height=400).add_selection(brush)
+    ).properties(width=500, height=400).add_selection(brush)
 
     ssp1_line = base.mark_line(
         point={
@@ -324,7 +328,11 @@ def do_ice_vis():
     pie_range = ['white', 'lightblue']
     pie = alt.Chart(proj_new_data).mark_arc().encode(
         theta = alt.Theta(field="area", type="quantitative") ,
-        color = alt.Color(field="Natural resource", scale=alt.Scale(range=pie_range)),
+        color = alt.Color(field="Natural resource", scale=alt.Scale(range=pie_range), legend=alt.Legend(
+        orient='none',
+        legendX=50, legendY=-40,
+        direction='horizontal',
+        titleAnchor='middle')),
         radius = alt.datum(150, scale=None), 
         tooltip="area"
     ).transform_filter(brush).properties(width=400, height=400).add_selection(brush)
