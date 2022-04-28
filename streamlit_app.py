@@ -111,7 +111,7 @@ for member_name, e in Country.__members__.items():
     countries[getattr(e, 'english_short_name').lower()] = getattr(e, 'numeric')
 
 visualization = ("The Story",  "The Global Picture", "The Curious Case of Economy",
-                   "The Exhaustive Story of Emissions",  "The Melting Ice Berg" )
+                   "The Exhaustive Story of Emissions",  "The Dwindling Ice Caps" )
 
 # Using object notation
 visual_type = st.sidebar.selectbox(
