@@ -330,7 +330,7 @@ def do_co2():
 
     st.subheader("Green house gas distribution")
     st.markdown("The visualisation digs deeper into the various green house gases.")
-    metric_data_filt = read_df_from_file("data/green_house_gas.csv")
+    metric_data_filt = pd.read_csv("data/green_house_gas.csv")
     chart = alt.Chart(metric_data_filt).mark_area().encode(
         y=alt.Y('sum(Metric Data)'),
         x='Year',
@@ -343,7 +343,7 @@ def do_co2():
     st.subheader("CO2 emmissions - Biggest Contributors")
     st.markdown("The visualisation uncovers the emission rates of carbon dioxide across different continents.\
          The four charts visualise the four major years and the rates corresponding to the years.")
-    co2_dist = read_df_from_file("data/co2_data.csv")
+    co2_dist = pd.read_csv("data/co2_data.csv")
     continents = ["Asia", "Oceania", "North America", "South America", "Europe", "Africa"]
     
     continent = st.multiselect("Continent", continents,default=["North America"])
