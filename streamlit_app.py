@@ -312,7 +312,19 @@ def do_ice_vis():
     (ssp1_point + ssp1_line) | pie 
 
 def do_co2():
-    
+
+    st.subheader("Green house gas distribution")
+    st.markdown("The visualisation digs deeper into the various green house gases.")
+    metric_data_filt = pd.read_csv("data/green_house_gas.csv")
+    chart = alt.Chart(metric_data_filt).mark_area().encode(
+        y=alt.Y('sum(Metric Data)'),
+        x='Year',
+        color='Indicator Name',
+        tooltip='sum(Metric Data)'
+    ).properties(width=800, height=400)
+    st.altair_chart(chart)
+
+
     st.subheader("CO2 emmissions - Biggest Contributors")
     st.markdown("The visualisation uncovers the emission rates of carbon dioxide across different continents.\
          The four charts visualise the four major years and the rates corresponding to the years.")
@@ -331,35 +343,30 @@ def do_co2():
 
         y1 = alt.Chart(co2_dist).mark_bar().encode(
                 x="1990",
-                y=alt.Y('index', sort = "-x")
+                y=alt.Y('index', sort = "-x", title=""),
+                tooltip = '1990'
             )
 
         y2 = alt.Chart(co2_dist).mark_bar().encode(
                 x = "2000",
-                y = alt.Y('index', sort = "-x")
+                y = alt.Y('index', sort = "-x", title=""),
+                tooltip = '2000'
             )
 
         y3 = alt.Chart(co2_dist).mark_bar().encode(
                     x="2010",
-                    y=alt.Y('index', sort = "-x")
+                    y=alt.Y('index', sort = "-x", title=""),
+                    tooltip = '2010'
                 )
 
         y4 = alt.Chart(co2_dist).mark_bar().encode(
                     x="2019",
-                    y=alt.Y('index', sort = "-x")
+                    y=alt.Y('index', sort = "-x", title=""),
+                    tooltip = '2019'
                 )
 
         st.altair_chart((y1 | y2 ))
         st.altair_chart((y3 | y4))
-    st.markdown("The visualisation digs deeper into the various green house gases.")
-    metric_data_filt = pd.read_csv("data/green_house_gas.csv")
-    chart = alt.Chart(metric_data_filt).mark_area().encode(
-        y=alt.Y('sum(Metric Data)'),
-        x='Year',
-        color='Indicator Name',
-        tooltip='sum(Metric Data)'
-    ).properties(width=800, height=400)
-    st.altair_chart(chart)
 
 
  
