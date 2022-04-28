@@ -282,7 +282,7 @@ def do_ice_vis():
         we might not have any ice caps left at the North Pole.")
     proj_temp_with_area = pd.read_csv("data/ice_area_temp.csv")
     
-    range_ = [ 'darkgreen', 'lightgreen', 'orange', 'red', 'darkred','blue', 'lightblue','skyblue']
+    range_ = [ 'darkgreen', 'lightgreen', 'orange', 'red', 'darkred','blue', 'white','skyblue']
     proj_new_data = proj_temp_with_area.rename(columns={'Category': 'Year'})
     brush = alt.selection_single(fields=['SSP', 'SSPType'], on='click', empty='none', init={'SSP': '9.61', 'SSPType':'SSP0'})
     base = alt.Chart(proj_new_data).encode(
