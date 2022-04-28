@@ -296,7 +296,7 @@ def do_ice_vis():
     proj_new_data = proj_temp_with_area.rename(columns={'Category': 'Year'})
     proj_new_data = proj_new_data.replace({'SSP0': 'Measured temperature', 'SSP1': 'SSP 1', 'SSP2': 'SSP 2', 'SSP3': 'SSP 3', 'SSP4': 'SSP 4', 'SSP5': 'SSP 5', 'ice': 'Ice', 'water': 'Water'})
     proj_new_data = proj_new_data.rename(columns={'ssp_type': 'Natural resource', 'SSPType': 'Path'})
-    brush = alt.selection_single(fields=['SSP', 'Path'], on='click', empty='none', init={'SSP': '9.61', 'Path':'SSP0'})
+    brush = alt.selection_single(fields=['SSP', 'Path'], on='click', empty='all')
     base = alt.Chart(proj_new_data).encode(
         alt.X('Year:Q'),
     )
