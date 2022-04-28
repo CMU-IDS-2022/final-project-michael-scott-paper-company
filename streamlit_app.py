@@ -289,7 +289,8 @@ def do_ice_vis():
         area of remaining ice extent in the Arctic sea. In some of the extreme cases such as SSP5, we see that\
         we might not have any ice caps left at the North Pole.")
     proj_temp_with_area = read_df_from_file("data/ice_area_temp.csv")
-    
+    st.markdown(f'<span style="color:blue">Interact-tip:</span> Select a point in line chart in one of the five SSP range line charts to view the corresponding ice sheet extent. The pie chart represents the amount of ice area (white) and the amount of water that has been melted(sky blue).', unsafe_allow_html=True)
+
     range_ = [ 'darkgreen', 'lightgreen', 'orange', 'red', 'darkred','blue']
     proj_new_data = proj_temp_with_area.rename(columns={'Category': 'Year'})
     proj_new_data = proj_new_data.replace({'SSP0': 'Measured temperature', 'SSP1': 'SSP 1', 'SSP2': 'SSP 2', 'SSP3': 'SSP 3', 'SSP4': 'SSP 4', 'SSP5': 'SSP 5', 'ice': 'Ice', 'water': 'Water'})
@@ -344,25 +345,26 @@ def do_ice_vis():
     # (ssp1_point + ssp1_line) | pie 
 
 def do_co2():
-
     st.subheader("Green house gas distribution")
     st.markdown("The visualisation digs deeper into the various green house gases.")
     metric_data_filt = pd.read_csv("data/green_house_gas.csv")
     metric_data_filt = metric_data_filt.replace({'CO2 emissions (kt)': 'CO2 emissions', 'Methane emissions (kt of CO2 equivalent)': 'Methane emissions', 'Nitrous oxide emissions (thousand metric tons of CO2 equivalent)': 'Nitrous oxide emissions'})
+    st.markdown(f'<span style="color:blue">Interact-tip:</span> The charts show the amount of individual green house gas emissions', unsafe_allow_html=True)
+
     chart = alt.Chart(metric_data_filt).mark_area().encode(
         y=alt.Y('sum(Metric Data)', axis = alt.Axis(title='Emission in kilo tons')),
         x='Year',
         color='Indicator Name',
         tooltip=[alt.Tooltip('sum(Metric Data)', title="Emission")]
     ).properties(width=800, height=400)
-    st.altair_chart(chart)
-
-
+    st.altair_chart(chart) 
 
     st.subheader("CO2 emissions - Biggest Contributors")
     st.markdown("The visualisation uncovers the emission rates of carbon dioxide across different continents.\
          The four charts visualise the four major years and the rates corresponding to the years.")
     co2_dist = pd.read_csv("data/co2_data.csv")
+    st.markdown(f'<span style="color:blue">Interact-tip:</span> Select the continents to filter on from the drop down to view the statistics for the set of the continents', unsafe_allow_html=True)
+
     continents = ["Asia", "Oceania", "North America", "South America", "Europe", "Africa"]
     
     continent = st.multiselect("Continent", continents,default=["North America"])
