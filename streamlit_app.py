@@ -133,14 +133,14 @@ def do_global_vis():
     st.altair_chart(line)
 
 def do_country_vis():
-    def create_chart(country_data, picked):
+    def create_chart(country_data, picked, metric_name):
         base1 = alt.Chart(country_data).encode(
             alt.X('Year', axis=alt.Axis(title=None))
         )
 
         area = base1.mark_area(opacity=0.3, color='#57A44C').encode(
             alt.Y('mean(Metric Data)',
-            axis=alt.Axis(title='Avg. Temperature (°C)', titleColor='#57A44C')),
+            axis=alt.Axis(title=metric_name, titleColor='#57A44C')),
         ).transform_filter(picked)
 
         line = base1.mark_line(stroke='#5276A7', point = True).encode(
@@ -211,10 +211,10 @@ def do_country_vis():
     )
 
     country_data = df_join_new
-    co2 = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'CO2 emissions (kt)'], picked)
-    electric = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'Electric power consumption (kWh per capita)'], picked)
-    greenhouse = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'Total greenhouse gas emissions (kt of CO2 equivalent)'], picked)
-    forest = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'Forest area (sq. km)'], picked)
+    co2 = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'CO2 emissions (kt)'], picked, "CO2 Emissions")
+    electric = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'Electric power consumption (kWh per capita)'], picked, "Electric power consumption")
+    greenhouse = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'Total greenhouse gas emissions (kt of CO2 equivalent)'], picked, "Total greenhouse gas emissions")
+    forest = create_chart(country_data.loc[df_join_new['Indicator Name'] == 'Forest area (sq. km)'], picked, "Forest area")
 
 
     joined = alt.vconcat((co2|electric), (greenhouse|forest))
