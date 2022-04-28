@@ -146,7 +146,7 @@ def do_global_vis():
     st.title("How does economy affect metric trends?")
     # st.subheader("")
 
-    metric_data_filt = pd.read_csv("data/filtered_metric_data_with_income_status_four_groups.csv")
+    metric_data_filt = read_df_from_file("data/filtered_metric_data_with_income_status_four_groups.csv")
 
     metrics_needed = ['CO2 emissions (kt)', 'Electric power consumption (kWh per capita)', 'Total greenhouse gas emissions (kt of CO2 equivalent)', 'Forest area (sq. km)']
 
@@ -170,11 +170,18 @@ def do_global_vis():
 
     st.altair_chart(line)
 
-    st.write("We would now like to explore whether the economic status of a country affects the various metrics that potentially affect the climate. In order to analyze this we have taken four categories of countries based on their income and plotted how the average value of each of the metrics have changed over that past 15 years.")
+    # st.write("We would now like to explore whether the economic status of a country affects the various metrics that potentially affect the climate. In order to analyze this we have taken four categories of countries based on their income and plotted how the average value of each of the metrics have changed over that past 15 years.")
 
-    st.write("Some interesting insights that we got were:")
+    # st.write("Some interesting insights that we got were:")
 
-    st.write(" 1. The CO2 emission for high income countries can be seen decreasing indicating the policies and steps they may have taken in the recent past to tackle the global warming problem. However, for upper and lower middle income countries the emission skeep rising (yet to take actions to prevent this or effects not seen yet).\n2. We also observe that for all metrics except forest area the low income groups have a very low average value, indicating lesser industrialization in these areas.\n3. Electric power consumption also sees a similar trend with high income countries controlling the electric power consumption ( flattening curve) whereas the rest still have an increasing trend.\n4. The challenge for developing countries is they no longer have an opportunity to develop first in a high carbon-intensive way and then clean up and decarbonize later. They need support today to make investments now to slow a changing climate and enable billions to live safer, more prosperous, inclusive and sustainable lives.\n5. If they are well designed and implemented, the policies countries put in place for low-carbon, resilient growth could also help them address poverty and inequality.")
+    st.write(" 1. The CO2 emission for high income countries can be seen decreasing indicating the policies\
+         and steps they may have taken in the recent past to tackle the global warming problem. However, for\
+              upper and lower middle income countries the emission skeep rising (yet to take actions to prevent \
+                  this or effects not seen yet).\n2. We also observe that for all metrics except forest area the\
+                       low income groups have a very low average value, indicating lesser industrialization \
+                           in these areas.\n3. Electric power consumption also sees a similar trend with high\
+                                income countries controlling the electric power consumption ( flattening curve)\
+                                     whereas the rest still have an increasing trend.")
 
 
 def do_country_vis():
@@ -217,7 +224,7 @@ def do_country_vis():
         ]
     )
 
-    df_join_new = pd.read_csv("data/Visualization_2_Data.csv")
+    df_join_new = read_df_from_file("data/Visualization_2_Data.csv")
     values = st.slider(
         'Select a range of years',
         1995, 2019, (2003, 2019)) 
@@ -280,7 +287,7 @@ def do_ice_vis():
     st.write("Based on these temperature projections, we have trained a simple regression that predicts the\
         area of remaining ice extent in the Arctic sea. In some of the extreme cases such as SSP5, we see that\
         we might not have any ice caps left at the North Pole.")
-    proj_temp_with_area = pd.read_csv("data/ice_area_temp.csv")
+    proj_temp_with_area = read_df_from_file("data/ice_area_temp.csv")
     
     range_ = [ 'darkgreen', 'lightgreen', 'orange', 'red', 'darkred','blue', 'white','skyblue']
     proj_new_data = proj_temp_with_area.rename(columns={'Category': 'Year'})
@@ -323,7 +330,7 @@ def do_co2():
 
     st.subheader("Green house gas distribution")
     st.markdown("The visualisation digs deeper into the various green house gases.")
-    metric_data_filt = pd.read_csv("data/green_house_gas.csv")
+    metric_data_filt = read_df_from_file("data/green_house_gas.csv")
     chart = alt.Chart(metric_data_filt).mark_area().encode(
         y=alt.Y('sum(Metric Data)'),
         x='Year',
@@ -336,7 +343,7 @@ def do_co2():
     st.subheader("CO2 emmissions - Biggest Contributors")
     st.markdown("The visualisation uncovers the emission rates of carbon dioxide across different continents.\
          The four charts visualise the four major years and the rates corresponding to the years.")
-    co2_dist = pd.read_csv("data/co2_data.csv")
+    co2_dist = read_df_from_file("data/co2_data.csv")
     continents = ["Asia", "Oceania", "North America", "South America", "Europe", "Africa"]
     
     continent = st.multiselect("Continent", continents,default=["North America"])
