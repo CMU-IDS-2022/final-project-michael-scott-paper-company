@@ -11,7 +11,7 @@ Sayani Kundu (sayanik) </br>
 Sumanth Subramanya Rao (ssr2) </br>
 Ramya Ramanathan (ramyar2)
 
-**Video URL**: TODO
+**Video URL**: https://drive.google.com/file/d/1IEr1VBlOPPcyoMFe4OovbFEdknN0jBde/view?usp=sharing 
 
 
 ## Abstract
