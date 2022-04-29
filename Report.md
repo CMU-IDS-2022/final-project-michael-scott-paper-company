@@ -48,7 +48,7 @@ Support Vector Regression is a method that uses Support Vector Machine based hyp
 
 In order to explore the data and provide insights on the causes and effects of global warming we carry out multiple experimentations and consolidate the following:
 
-* # Exploration -
+* ### Exploration -
 
 ![alt text](vis1.png "")
 
