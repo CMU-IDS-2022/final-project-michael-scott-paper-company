@@ -52,5 +52,5 @@ Climate change is a global problem that affects all walks of life and is a press
 [Project Report](Report.md)
 
 ### Link to video 
-
-[Video Link](https://drive.google.com/file/d/1IEr1VBlOPPcyoMFe4OovbFEdknN0jBde/view?usp=sharing)
+[Video Link](IDS project video.mp4)
+[Alternate Link](https://drive.google.com/file/d/1IEr1VBlOPPcyoMFe4OovbFEdknN0jBde/view?usp=sharing)
