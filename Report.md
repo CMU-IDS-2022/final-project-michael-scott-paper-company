@@ -29,7 +29,7 @@ One significant paper that thoroughly researches all the existing methods is: Ex
 
 Another source of research on this topic comes from the World Bank data ([link](https://data.worldbank.org/)) The world bank research page highlights the various factors affecting climate change. The website shows statistics on each country and various other metrics. 
 
-Our work derives many data sources from the above mentioned data source ([link](https://data.worldbank.org/topic/19)) and builds on top to provide a consolidated visualization. Our aim was to provide users with a concrete and realistic idea of the extent of climate change and yet keep the visualizations simple enough for easy comprehension. We try to model the various causes and effects of climate change in the current world and end with a projected model of the state of ice sheets in the future. 
+Our work derives many data files from the above mentioned data source ([link](https://data.worldbank.org/topic/19)) and builds on top to provide a consolidated visualization. Our aim was to provide users with a concrete and realistic idea of the extent of climate change and yet keep the visualizations simple enough for easy comprehension. We try to model the various causes and effects of climate change in the current world and end with a projected model of the state of ice sheets in the future. 
 
 
 
@@ -48,7 +48,7 @@ Support Vector Regression is a method that uses Support Vector Machine based hyp
 
 In order to explore the data and provide insights on the causes and effects of global warming we carry out multiple experimentations and consolidate the following:
 
-* Exploration -
+* # Exploration -
 
 ![alt text](vis1.png "")
 
@@ -119,3 +119,6 @@ Although we have been able to show the various causes such as co2, greenhouse ga
 Another dimension in which the work can be progressed is using machine learning models with sparse data.  For example, the data for temperature and co2 is at a much lower granularity to train a machine learning model. Hence leveraging the data sources and training optimized models to get more robust models. 
 
 
+## References 
+
+1. https://www.diva-portal.org/smash/get/diva2:1204420/FULLTEXT01.pdf)
