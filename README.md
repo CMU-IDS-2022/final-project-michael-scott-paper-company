@@ -28,7 +28,7 @@ While writing the proposal for the project, we did some preprocessing on the dat
 - [x] All code for the project should be in the repo.
 - [x] Update the **Online URL** above to point to your deployed project.
 - [x] A detailed [project report](Report.md).  Each student should submit the URL that points to this file in their github repo on Canvas.
-- [ ] A 5 minute video demonstration.  Upload the video to this github repo and link to it from your report.
+- [x] A 5 minute video demonstration.  Upload the video to this github repo and link to it from your report.
 
 
 ### Summary Image
@@ -51,3 +51,6 @@ Climate change is a global problem that affects all walks of life and is a press
 
 [Project Report](Report.md)
 
+### Link to video 
+
+[Video Link](https://drive.google.com/file/d/1IEr1VBlOPPcyoMFe4OovbFEdknN0jBde/view?usp=sharing)
