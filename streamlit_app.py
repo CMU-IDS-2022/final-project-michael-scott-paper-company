@@ -221,9 +221,7 @@ def do_country_vis():
     )
 
     df_join_new = read_df_from_file("data/Visualization_2_Data.csv")
-    values = st.slider(
-        'Select a range of years',
-        1995, 2019, (2003, 2019)) 
+  
     
     st.markdown("The visualisation below shows the global overview of increase in temperature scaled by the value of increase. The countries that are red have shown significant increase in tempearure.\
         We can select a particular country to view its statistics.  We try to correlate the trends in temperature increase with various possible factors.\
@@ -234,7 +232,9 @@ def do_country_vis():
     st.markdown(f'<span style="color:blue">Interact-tip:</span> Select a time window and a country to view the temperature difference across years. The graphs on the right show the trend\
         of temperature change over the years along with the metrics mentioned above. This visualization helps analyze the correlation between temperature and other causal metrics', unsafe_allow_html=True)
 
-
+    values = st.slider(
+        'Select a range of years',
+        1995, 2019, (2003, 2019)) 
     df_2012 = df_join_new[df_join_new['Year'] == values[0]]
     df_2013 = df_join_new[df_join_new['Year'] == values[1]]
     df_merged = df_2012.set_index('Country').join(df_2013.set_index('Country'), how='inner', lsuffix='_x', rsuffix='_y').reset_index()
