@@ -15,6 +15,10 @@ Ramya Ramanathan (ramyar2)
 
 Short (~250 words) abstract of the concrete data science problem and how the solutions addresses the problem.
 
+## Abstract
+
+Climate change is a global problem that affects all walks of life and is a pressing issue that needs to be addressed collectively by us. There are several factors that contribute to it and each of them to different extents. Given the widespread impact of climate change, it is important to analyze the major contributing factors and the effect. In this project, we attempt to craft a data-driven story using visualizations and interactions on climate change, its causes and some projections for the future based on current trends. We plan to look at this problem at two levels: at a country level - whether the economic status, the level of industrialization etc of a country directly correlates with how much it contributes to climate change and also at a global level - the relative amounts to which different countries and regions are impacted by climate change. In addition to this, we also use projections of temperature into the future and develop a model to predict the extent of Arctic Sea ice sheets and visualize them.
+
 ## Introduction
 
 Global Warming has been a pressing issue that has raised concerns about the quality of life in the future.The temperature across the world has been increasing at an alarming rate, which can lead to devastating consequences that disrupt the natural order, such as increase in surface temperature, anomalies in precipitation, and melting of glaciers. This can often be attributed to human activities that lead to greenhouse gas emissions, etc. 
