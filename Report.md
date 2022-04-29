@@ -55,7 +55,7 @@ In order to explore the data and provide insights on the causes and effects of g
 
    To emphasize the importance of this project we plot the surface temperature and sea-level at a global scale over the past decades and from our plots it is very evident that there has been an average 1 degree increase in the temperature over the last century. The sea level has also increased by ~100mm over the last 30 years. These are the direct consequences of global warming and make it crucial to bring about awareness of how destructive climate change can be and what are some of the major features contributing to it. The data used for the plots were sourced from NASA's climate change repository([link](https://climate.nasa.gov/)).
 
-* Major factors affecting climate change -
+* ### Major factors affecting climate change -
 ![alt text](vis2.png "")
 ![alt text](vis2_1.png "")
    In the next visualization we wanted to explore how the surface temperature of the countries around the world have changed over time. At the same time it would be crucial to find the factors that could potentially affect climate change over time. For the first portion of the visualization we used a world map and reproduced a heatmap to show to what extent a country had undergone temperate change over a given period of time. We give the users the option to choose the year range for which they want to see the change via an interactive slider.  For the second part of the visualization, we give the user an option to select a country of their choice and we display the plot of 4 major metrics (that we observed to be affecting surface temperature, namely - CO2 emissions, electricity power consumption, forest area and greenhouse gas emissions) over the last 25 years. The data used for the plots were sourced from NASA's climate change repository([link](https://climate.nasa.gov/)) and  World Bank data ([link](https://data.worldbank.org/)).
@@ -64,7 +64,7 @@ In order to explore the data and provide insights on the causes and effects of g
 
    Thus, when the user chooses a year range from the slider, they can see which countries were impacted the most and the least by global warming over that period. On further selecting a country, we display 4 plots, each having the surface temperature and the corresponding metric value over the years. This enables us to determine the correlation of these metrics with climate change ( both at a global level and if there are any country specific trends). One such trend can be seen for Germany and is explained in the Discussions section.
 
-* Economic Impact on Climate - 
+* ### Economic Impact on Climate - 
 ![alt text](vis3.png "")
 
    When we talk about effects of metrics like CO2 emissions and power consumption for different countries, the obvious question that would come to mind is do all countries behave similarly and would some countries show unique trends in the data over time depending on their industrial engagement and financial status? If we can identify some patterns in certain groups of countries we would be able to understand where to focus when tackling climate change.
@@ -72,13 +72,13 @@ In order to explore the data and provide insights on the causes and effects of g
    In order for users to understand such a scenario, we categorize our countries into 4 buckets based on their income. Then, we plot the average value for each of the metrics named above for the user to compare and contrast any significant differences in the trends between each category of income. We would provide a dropdown for the user to choose a metric one at a time and analyze such patterns. Using the World Bank data ([link](https://data.worldbank.org/)) data we observed some interesting trends that are elaborated in Discussions.
 
 
-* Impact of Greenhouse Gasses over the years - 
+* ### Impact of Greenhouse Gasses over the years - 
 
    Since greenhouse gasses play a major role in contributing to climate change and global warming, we wanted to see how they have been distributed over time. To this end, we explored the World Bank data ([link](https://data.worldbank.org/)) and found out that CO2, methane and nitrous oxide are the three major greenhouse gas emissions and they have been continually increasing over the years. Since CO2 has the biggest impact among all gases, it would be interesting to see which industries have majorly released carbon dioxide and if the major contributor has changed in the past 4 decades. For this we allow the users to select the continents on which they would like to see the CO2 contributions ( multiple selection as they may want to see an entire zone together). We then plot bar charts to show the major contribution amount from industries like coal, gas, oil etc. This would provide details about the industries one should focus on if we want to reduce CO2 emissions in the future. One important thing to note is there is a trade CO2 value that can have negative values. CO2 from trade is the net of carbon dioxide which is imported or exported via traded goods with an economy. A positive value denotes that a country or region is a net importer of CO2 emissions, a negative value indicates a country is a net exporter. 
    
 ![alt text](vis4.png "")
 ![alt text](vis4_1.png "")
-* Impact of rising temperatures on ice sheets at the poles -
+* ### Impact of rising temperatures on ice sheets at the poles -
 
    In this section, we explore the effects of climate change on the average global surface temperature and the effect on the ice extent in the Arctic Sea. For this, we have obtained projected values of temperature from 'Shared Socioeconomic Pathways' (SSPs). The SSPs provide 5 pathways the world could take ranging from a sustainability-focused growth to unconstrained growth in economic output and energy use.
 
