@@ -11,7 +11,8 @@ Sayani Kundu (sayanik) </br>
 Sumanth Subramanya Rao (ssr2) </br>
 Ramya Ramanathan (ramyar2)
 
-**Video URL**: https://drive.google.com/file/d/1IEr1VBlOPPcyoMFe4OovbFEdknN0jBde/view?usp=sharing 
+**Video URL**: https://drive.google.com/file/d/1IEr1VBlOPPcyoMFe4OovbFEdknN0jBde/view?usp=sharing  </br>
+[Alternate Video Github Link](https://github.com/CMU-IDS-2022/final-project-michael-scott-paper-company/blob/main/IDS%20project%20video.mp4)
 
 
 ## Abstract
